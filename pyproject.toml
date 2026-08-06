@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gmail-llm"
+version = "0.1.0"
+description = "Summarize Gmail newsletters with the legacy OpenAI Python client."
+readme = "README.md"
+requires-python = ">=3.10,<3.12"
+dependencies = [
+    "emoji==2.8.0",
+    "google-api-python-client==2.109.0",
+    "google-auth==2.25.2",
+    "google-auth-oauthlib==1.0.0",
+    "Markdown==3.8.2",
+    "openai==0.27.8",
+    "python-dotenv==1.2.2",
+    "tiktoken==0.3.3",
+    "tzdata>=2023.3; platform_system == 'Windows'",
+]
+
+[project.optional-dependencies]
+dev = [
+    "coverage[toml]>=7.3,<8",
+    "pip-audit>=2.9,<3",
+    "pytest>=9.0.3,<10",
+]
+
+[project.scripts]
+gmail-llm = "gmail_newsletter_summarizer:main"
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.setuptools]
+py-modules = ["gmail_newsletter_summarizer", "main"]
+
+[tool.coverage.run]
+branch = true
+source = ["gmail_newsletter_summarizer"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
